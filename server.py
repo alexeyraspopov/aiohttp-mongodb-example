@@ -2,10 +2,6 @@ import asyncio
 from aiohttp.web import Application, Response
 
 
-def hello_world(request):
-    return Response(text='hello!')
-
-
 def create_server(loop, handler, host, port):
     srv = loop.create_server(handler, host, port)
     return loop.run_until_complete(srv)
@@ -23,7 +19,13 @@ def run_server():
     server = create_server(loop=loop, handler=handler,
                            host='0.0.0.0', port=9000)
 
-    app.router.add_route('GET', '/', hello_world)
+    app.router.add_route('GET', '/todos', get_all_todos)
+    app.router.add_route('POST', '/todos', create_todos)
+    app.router.add_route('PATCH', '/todos', update_todos)
+    app.router.add_route('DELETE', '/todos', remove_todos)
+    app.router.add_route('GET', '/todos/{id}', get_todo)
+    app.router.add_route('PATCH', '/todos/{id}', update_todo)
+    app.router.add_route('DELETE', '/todos/{id}', remove_todo)
 
     try:
         loop.run_forever()
