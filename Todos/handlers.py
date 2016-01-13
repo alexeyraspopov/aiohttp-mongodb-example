@@ -18,12 +18,15 @@ def remove_todos(request):
 
 
 def get_todo(request):
-    return Response(text='get_todo')
+    id = request.match_info['id']
+    return Response(text='get_todo {}'.format(id))
 
 
 def update_todo(request):
-    return Response(text='update_todo')
+    id = request.match_info['id']
+    return Response(text='update_todo {}'.format(id))
 
 
 def remove_todo(request):
-    return Response(text='remove_todo')
+    id = request.match_info['id']
+    return Response(text='remove_todo {}'.format(id))
