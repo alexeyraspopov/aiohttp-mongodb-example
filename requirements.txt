@@ -1,0 +1,4 @@
+aiohttp==0.20.2
+pep8==1.7.0
+motor==0.5
+pytest==2.8.5
