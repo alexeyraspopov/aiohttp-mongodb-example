@@ -1,5 +1,6 @@
 import asyncio
-from aiohttp.web import Application, Response
+from aiohttp.web import Application
+from Todos import handlers
 
 
 def create_server(loop, handler, host, port):
@@ -19,13 +20,13 @@ def run_server():
     server = create_server(loop=loop, handler=handler,
                            host='0.0.0.0', port=9000)
 
-    app.router.add_route('GET', '/todos', get_all_todos)
-    app.router.add_route('POST', '/todos', create_todos)
-    app.router.add_route('PATCH', '/todos', update_todos)
-    app.router.add_route('DELETE', '/todos', remove_todos)
-    app.router.add_route('GET', '/todos/{id}', get_todo)
-    app.router.add_route('PATCH', '/todos/{id}', update_todo)
-    app.router.add_route('DELETE', '/todos/{id}', remove_todo)
+    app.router.add_route('GET', '/todos', handlers.get_all_todos)
+    app.router.add_route('POST', '/todos', handlers.create_todos)
+    app.router.add_route('PATCH', '/todos', handlers.update_todos)
+    app.router.add_route('DELETE', '/todos', handlers.remove_todos)
+    app.router.add_route('GET', '/todos/{id}', handlers.get_todo)
+    app.router.add_route('PATCH', '/todos/{id}', handlers.update_todo)
+    app.router.add_route('DELETE', '/todos/{id}', handlers.remove_todo)
 
     try:
         loop.run_forever()
