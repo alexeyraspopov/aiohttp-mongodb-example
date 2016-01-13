@@ -7,5 +7,5 @@ run-server:
 lint:
 	pep8 ./
 
-test:
+test: lint
 	py.test tests/
